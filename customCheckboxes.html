@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom Checkboxes</title>
+    <style>
+        .custom-checkbox-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            padding: 10px;
+        }
+
+        .custom-checkbox {
+            padding: 10px;
+            border: 2px solid #000; /* Black border */
+            border-radius: 5px;
+            cursor: pointer;
+            user-select: none; /* Prevent text from being selected */
+        }
+
+        .custom-checkbox.selected {
+            background-color: #007bff; /* Blue background for selected */
+            color: #fff; /* White text for selected */
+        }
+    </style>
+</head>
+<body>
+    <div class="custom-checkbox-group">
+        <div class="custom-checkbox">Checkbox 1</div>
+        <div class="custom-checkbox">Checkbox 2</div>
+        <div class="custom-checkbox">Checkbox 3</div>
+        <div class="custom-checkbox">Checkbox 4</div>
+    </div>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', (event) => {
+        const MAX_SELECTIONS = 2;
+        const checkboxes = document.querySelectorAll('.custom-checkbox');
+
+        checkboxes.forEach(chk => {
+          chk.addEventListener('click', () => {
+            const selectedCheckboxes = document.querySelectorAll('.custom-checkbox.selected');
+            if (chk.classList.contains('selected')) {
+              chk.classList.remove('selected');
+            } else {
+              if (selectedCheckboxes.length >= MAX_SELECTIONS) {
+                alert('You can only select up to ' + MAX_SELECTIONS + ' options.');
+                return;
+              }
+              chk.classList.add('selected');
+            }
+          });
+        });
+      });
+    </script>
+</body>
+</html>
